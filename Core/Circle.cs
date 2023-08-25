@@ -6,8 +6,20 @@ public sealed class Circle : IArea
 
     public Circle(double radius)
     {
+        ValidateRadius(radius);
+
         Radius = radius;
+        Area = CalculateArea();
     }
 
-    public double Area => throw new NotImplementedException();
+    public double Area { get; }
+
+    private double CalculateArea() => Radius * Radius * Math.PI;
+
+    private static void ValidateRadius(double radius)
+    {
+        string message = "The radius of the circle cannot have a negative value";
+
+        if (radius < 0.0) throw new ArgumentOutOfRangeException(nameof(radius), message);
+    }
 }
