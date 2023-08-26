@@ -23,7 +23,7 @@ public sealed class Triangle : IArea
 
     private static void ValidateNonNegativeSides(double a, double b, double c)
     {
-        string message = "The side of the triangle cannot have a negative value";
+        const string message = "The side of the triangle cannot have a negative value";
 
         if (a < 0.0) throw new ArgumentOutOfRangeException(nameof(a), message);
         if (b < 0.0) throw new ArgumentOutOfRangeException(nameof(b), message);
@@ -33,7 +33,7 @@ public sealed class Triangle : IArea
     // https://en.wikipedia.org/wiki/Triangle_inequality
     private static void ValidateTriangleInequality(double a, double b, double c)
     {
-        string message = "The sum of the two sides of a triangle is always greater than or equal to the third side";
+        const string message = "The sum of the two sides of a triangle is always greater than or equal to the third side";
 
         if ((b + c) < a) throw new ArgumentException(message, nameof(a));
         if ((a + c) < b) throw new ArgumentException(message, nameof(b));
@@ -49,10 +49,10 @@ public sealed class Triangle : IArea
     }
 
     // https://en.wikipedia.org/wiki/Right_triangle
-    private bool CheckRightness(double epsilon = 0.0001)
+    private bool CheckRightness()
     {
         double[] sides = { A, B, C };
         Array.Sort(sides);
-        return (C * C).NearlyEqual((A * A) + (B * B), epsilon);
+        return (C * C).NearlyEqual((A * A) + (B * B));
     }
 }

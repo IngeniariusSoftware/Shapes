@@ -18,7 +18,7 @@ public sealed class Circle : IArea
 
     private static void ValidateRadius(double radius)
     {
-        string message = "The radius of the circle cannot have a negative value";
+        const string message = "The radius of the circle cannot have a negative value";
 
         if (radius < 0.0) throw new ArgumentOutOfRangeException(nameof(radius), message);
     }

@@ -2,7 +2,7 @@
 
 public static class DoubleExtension
 {
-    public static bool NearlyEqual(this double a, double b, double epsilon)
+    public static bool NearlyEqual(this double a, double b, double epsilon = 0.0001)
     {
         if (a.Equals(b)) return true;
 
