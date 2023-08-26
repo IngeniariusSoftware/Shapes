@@ -53,6 +53,6 @@ public sealed class Triangle : IArea
     {
         double[] sides = { A, B, C };
         Array.Sort(sides);
-        return (C * C).NearlyEqual((A * A) + (B * B));
+        return ((sides[0] * sides[0]) + (sides[1] * sides[1])).NearlyEqual(sides[2] * sides[2]);
     }
 }
