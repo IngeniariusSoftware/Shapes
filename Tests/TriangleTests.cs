@@ -104,4 +104,38 @@ public class TriangleTests
 
         Assert.Throws<ArgumentException>(() => new Triangle(a, b, c));
     }
+
+    [Fact]
+    public void TestRightness()
+    {
+        double a = 3.0, b = 4.0, c = 5.0;
+        double[][] sides =
+            { new[] { a, b, c }, new[] { a, c, b }, new[] { b, a, c }, new[] { b, c, a }, new[] { c, a, b }, new[] { c, b, a } };
+
+        bool expected = true;
+
+        foreach (double[] data in sides)
+        {
+            var triangle = new Triangle(data[0], data[1], data[2]);
+            bool actual = triangle.IsRight;
+            Assert.Equal(expected, actual);
+        }
+    }
+
+    [Fact]
+    public void TestNonRightness()
+    {
+        double a = 5.0, b = 6.0, c = 7.0;
+        double[][] sides =
+            { new[] { a, b, c }, new[] { a, c, b }, new[] { b, a, c }, new[] { b, c, a }, new[] { c, a, b }, new[] { c, b, a } };
+
+        bool expected = false;
+
+        foreach (double[] data in sides)
+        {
+            var triangle = new Triangle(data[0], data[1], data[2]);
+            bool actual = triangle.IsRight;
+            Assert.Equal(expected, actual);
+        }
+    }
 }
