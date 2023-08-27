@@ -14,7 +14,8 @@ public sealed class Circle : IArea
 
     public double Area { get; }
 
-    private double CalculateArea() => Radius * Radius * Math.PI;
+    // https://en.wikipedia.org/wiki/Area_of_a_circle
+    private double CalculateArea() => Math.PI * Radius * Radius;
 
     private static void ValidateRadius(double radius)
     {
