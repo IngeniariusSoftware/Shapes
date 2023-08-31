@@ -13,6 +13,6 @@ public static class DoubleExtension
 
         if (a == 0.0 || b == 0.0 || modulesSum < MinNormal) return moduloDiff < (epsilon * MinNormal);
 
-        return moduloDiff / modulesSum < epsilon;
+        return (moduloDiff / modulesSum) < epsilon;
     }
 }
