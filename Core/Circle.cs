@@ -4,15 +4,16 @@ public sealed class Circle : IArea
 {
     public readonly double Radius;
 
+    private double? _area;
+
     public Circle(double radius)
     {
         ValidateRadius(radius);
 
         Radius = radius;
-        Area = CalculateArea();
     }
 
-    public double Area { get; }
+    public double Area => _area ??= CalculateArea();
 
     // https://en.wikipedia.org/wiki/Area_of_a_circle
     private double CalculateArea() => Math.PI * Radius * Radius;

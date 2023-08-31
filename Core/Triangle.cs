@@ -4,7 +4,9 @@ public sealed class Triangle : IArea
 {
     public readonly double A, B, C;
 
-    public readonly bool IsRight;
+    private double? _area;
+
+    private bool? _isRight;
 
     public Triangle(double a, double b, double c)
     {
@@ -14,20 +16,19 @@ public sealed class Triangle : IArea
         A = a;
         B = b;
         C = c;
-
-        Area = CalculateArea();
-        IsRight = CheckRightness();
     }
 
-    public double Area { get; }
+    public double Area => _area ??= CalculateArea();
+
+    public bool IsRight => _isRight ??= CheckRightness();
 
     private static void ValidateNonNegativeSides(double a, double b, double c)
     {
         const string message = "The side of the triangle cannot have a negative value";
 
-        if (a < 0.0) throw new ArgumentOutOfRangeException(nameof(a), message);
-        if (b < 0.0) throw new ArgumentOutOfRangeException(nameof(b), message);
-        if (c < 0.0) throw new ArgumentOutOfRangeException(nameof(c), message);
+        if (a < 0.0) throw new ArgumentOutOfRangeException(nameof(a), a, message);
+        if (b < 0.0) throw new ArgumentOutOfRangeException(nameof(b), b, message);
+        if (c < 0.0) throw new ArgumentOutOfRangeException(nameof(c), c, message);
     }
 
     // https://en.wikipedia.org/wiki/Triangle_inequality
@@ -44,8 +45,7 @@ public sealed class Triangle : IArea
     private double CalculateArea()
     {
         double s = (A + B + C) / 2.0; // semiperimeter
-        double area = Math.Sqrt(s * (s - A) * (s - B) * (s - C));
-        return area;
+        return Math.Sqrt(s * (s - A) * (s - B) * (s - C));
     }
 
     // https://en.wikipedia.org/wiki/Right_triangle
